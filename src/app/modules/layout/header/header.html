@@ -1,0 +1,74 @@
+<nav class="navbar" [class.scrolled]="pageYPosition() > 20">
+  <div class="container">
+
+    <!-- LOGO -->
+    <a class="logo" (click)="scroll('hero')">
+      <span class="logo-bracket">&lt;</span>
+      <span class="logo-text">AK</span>
+      <span class="logo-slash"> /</span>
+      <span class="logo-bracket">&gt;</span>
+    </a>
+
+    <!-- DESKTOP MENU -->
+    <ul class="nav-links">
+      @for (item of menuItems; track $index) {
+      <li>
+        <a (click)="scroll(item.id)" [class.active]="activeSection() === item.id">
+          <span class="nav-number">0{{ $index + 1 }}.</span>
+          {{ item.label }}
+        </a>
+      </li>
+      }
+      <li class="nav-resume">
+        <a href="/assets/resume.pdf" target="_blank" rel="noopener" class="resume-btn">
+          <mat-icon class="resume-icon">description</mat-icon>
+          Resume
+        </a>
+      </li>
+    </ul>
+
+    <!-- MOBILE BUTTON -->
+    <button class="menu-btn" (click)="toggleMenu()"
+      [attr.aria-label]="responsiveMenuVisible() ? 'Close menu' : 'Open menu'" aria-controls="mobile-menu">
+      <mat-icon>{{ responsiveMenuVisible() ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
+  </div>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="mobile-overlay" [class.show]="responsiveMenuVisible()" (click)="toggleMenu()">
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" [class.show]="responsiveMenuVisible()" role="navigation">
+
+    <div class="mobile-menu-header">
+      <a class="logo" (click)="scroll('hero')">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-text">AK</span>
+        <span class="logo-slash"> /</span>
+        <span class="logo-bracket">&gt;</span>
+      </a>
+      <button class="mobile-close" (click)="toggleMenu()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="mobile-menu-links">
+      @for (item of menuItems; track $index) {
+      <a (click)="scroll(item.id)" [class.active]="activeSection() === item.id">
+        <span class="nav-number">0{{ $index + 1 }}.</span>
+        {{ item.label }}
+      </a>
+      }
+    </div>
+
+    <div class="mobile-menu-footer">
+      <a href="/assets/resume.pdf" target="_blank" rel="noopener" class="resume-btn">
+        <mat-icon class="resume-icon">description</mat-icon>
+        Resume
+      </a>
+    </div>
+
+  </div>
+</nav>

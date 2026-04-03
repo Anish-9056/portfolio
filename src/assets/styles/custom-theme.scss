@@ -1,0 +1,208 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use '@angular/material' as mat;
+// @use "./../Fonts/SPECIAL GOTHIC/special-goth.scss";
+@use './../Fonts/MANROPE/manrope.scss';
+@use './../Fonts/SPECIAL GOTHIC/special-goth.scss';
+@use './variables' as *;
+@import 'https://fonts.googleapis.com/css?family=Material+Icons';
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500&display=swap');
+
+$custom-font-family: 'Manrope, SpecialGothic';
+
+@function _high-contrast-value($light, $dark, $theme-type) {
+  @if ($theme-type ==light) {
+    @return $light;
+  }
+
+  @if ($theme-type ==dark) {
+    @return $dark;
+  }
+
+  @if ($theme-type ==color-scheme) {
+    @return light-dark(#{$light}, #{$dark});
+  }
+
+  @error 'Unknown theme-type #{$theme-type}. Expected light, dark, or color-scheme';
+}
+
+@mixin high-contrast-overrides($theme-type) {
+  @include mat.theme-overrides(( // Primary = Orange
+      primary: _high-contrast-value(#f27a1a, #ffb37a, $theme-type),
+      on-primary: _high-contrast-value(#ffffff, #2b1500, $theme-type),
+
+      primary-container: _high-contrast-value(#ffe2cc, #5a2a00, $theme-type),
+      on-primary-container: _high-contrast-value(#2b1500, #ffe2cc, $theme-type),
+
+      inverse-primary: _high-contrast-value(#ffb37a, #f27a1a, $theme-type),
+
+      // Secondary = Warm charcoal (good contrast with orange)
+      secondary: _high-contrast-value(#2f2a25, #e8ded6, $theme-type),
+      on-secondary: _high-contrast-value(#ffffff, #1a1613, $theme-type),
+
+      secondary-container: _high-contrast-value(#f1e7df, #3a332d, $theme-type),
+      on-secondary-container: _high-contrast-value(#1a1613, #f1e7df, $theme-type),
+
+      // Tertiary = Warm brown accent
+      tertiary: _high-contrast-value(#8b5a2b, #ffd7b5, $theme-type),
+      on-tertiary: _high-contrast-value(#ffffff, #2b1500, $theme-type),
+
+      tertiary-container: _high-contrast-value(#ffdcc2, #4a2a10, $theme-type),
+      on-tertiary-container: _high-contrast-value(#2b1500, #ffdcc2, $theme-type),
+
+      // Background / surface = warm neutrals
+      background: _high-contrast-value(#fff7f0, #14110f, $theme-type),
+      on-background: _high-contrast-value(#1f1b16, #f6efe9, $theme-type),
+
+      surface: _high-contrast-value(#ffffff, #14110f, $theme-type),
+      on-surface: _high-contrast-value(#1f1b16, #f6efe9, $theme-type),
+
+      surface-variant: _high-contrast-value(#f6e8dc, #2a2420, $theme-type),
+      on-surface-variant: _high-contrast-value(#4a4038, #e9ded6, $theme-type),
+
+      surface-container-lowest: _high-contrast-value(#ffffff, #0f0d0b, $theme-type),
+      surface-container: _high-contrast-value(#fff1e5, #1c1815, $theme-type),
+      surface-container-high: _high-contrast-value(#ffe9d8, #25201c, $theme-type),
+      surface-container-highest: _high-contrast-value(#ffe2cc, #2f2924, $theme-type),
+
+      outline: _high-contrast-value(#e7d7c9, #8f8072, $theme-type),
+      outline-variant: _high-contrast-value(#f0e2d6, #5f544c, $theme-type),
+
+      shadow: _high-contrast-value(#000000, #000000, $theme-type),
+      scrim: _high-contrast-value(#000000, #000000, $theme-type),
+
+      // Error (keep standard)
+      error: _high-contrast-value(#ba1a1a, #ffb4ab, $theme-type),
+      on-error: _high-contrast-value(#ffffff, #690005, $theme-type),
+      error-container: _high-contrast-value(#ffdad6, #93000a, $theme-type),
+      on-error-container: _high-contrast-value(#410002, #ffdad6, $theme-type),
+
+      // Surface tint should match primary
+      surface-tint: _high-contrast-value(#f27a1a, #ffb37a, $theme-type),
+      inverse-surface: _high-contrast-value(#2f2924, #f6efe9, $theme-type),
+      inverse-on-surface: _high-contrast-value(#f6efe9, #2f2924, $theme-type),
+    ));
+}
+
+$font-classes: (
+  body-large: var(--mat-sys-body-large),
+  body-medium: var(--mat-sys-body-medium),
+  body-small: var(--mat-sys-body-small),
+  display-large: var(--mat-sys-display-large),
+  display-medium: var(--mat-sys-display-medium),
+  display-small: var(--mat-sys-display-small),
+  headline-large: var(--mat-sys-headline-large),
+  headline-medium: var(--mat-sys-headline-medium),
+  headline-small: var(--mat-sys-headline-small),
+  label-large: var(--mat-sys-label-large),
+  label-medium: var(--mat-sys-label-medium),
+  label-small: var(--mat-sys-label-small),
+  title-large: var(--mat-sys-title-large),
+  title-medium: var(--mat-sys-title-medium),
+  title-small: var(--mat-sys-title-small),
+);
+
+@each $name, $value in $font-classes {
+  .font-#{$name} {
+    font: #{$value};
+  }
+}
+
+// Include the default theme styles.
+html {
+  margin: 0;
+  color-scheme: light;
+  @include mat.theme((color: (theme-type: color-scheme),
+      typography: (plain-family: 'Manrope',
+        brand-family: 'SpecialGothic',
+        bold-weight: 700,
+        medium-weight: 600,
+        regular-weight: 500,
+      ),
+      density: 0,
+    ));
+  @include high-contrast-overrides(color-scheme);
+  // @include mat.typography-hierarchy($typography-config);
+
+  @include mat.radio-overrides((label-text-color: var(--mat-sys-on-surface-variant)));
+
+  @include mat.divider-overrides((color: var(--mat-sys-outline-variant)));
+
+  @include mat.tabs-overrides((container-height: 34px));
+
+  @include mat.list-overrides((list-item-one-line-container-height: 42px));
+
+  @include mat.table-overrides((header-container-height: 42px,
+      row-item-container-height: 38px,
+      header-headline-color: var(--mat-sys-on-primary),
+      footer-container-height:28px));
+
+  @include mat.sort-overrides((arrow-color: var(--mat-sys-on-primary),
+    ));
+
+  @include mat.button-overrides((filled-container-color: $dark));
+
+  @include mat.tabs-overrides((divider-color: #a9b3b3));
+
+  .mat-mdc-row:nth-child(odd) {
+    background: $bright-metallic-blue;
+  }
+}
+
+html,
+body {
+  --mat-sys-body-large: 500 1rem / 1.5rem Manrope;
+  --mat-sys-body-medium: 500 0.8rem / 1.25rem Manrope;
+  --mat-sys-body-medium-size: 0.8rem;
+  --mat-sys-body-small: 500 0.75rem / 1rem Manrope;
+  --mat-sys-display-large: 500 3.562rem / 4rem SpecialGothic;
+  --mat-sys-display-medium: 500 2.812rem / 3.25rem SpecialGothic;
+  --mat-sys-display-small: 500 2.25rem / 2.75rem SpecialGothic;
+  --mat-sys-headline-large: 500 2rem / 2.5rem SpecialGothic;
+  --mat-sys-headline-medium: 500 1.75rem / 1.25rem SpecialGothic;
+  --mat-sys-headline-small: 500 1.5rem / 2rem SpecialGothic;
+  --mat-sys-label-large: 600 0.875rem / 1.25rem Manrope;
+  --mat-sys-label-medium: 600 0.75rem / 1rem Manrope;
+  --mat-sys-label-small: 600 0.688rem / 1rem Manrope;
+  --mat-sys-title-large: 500 1.375rem / 1.75rem SpecialGothic;
+  --mat-sys-title-medium: 600 1rem / 1rem Manrope;
+  --mat-sys-title-small: 600 0.875rem / 0.875rem Manrope;
+
+
+  @include mat.form-field-overrides((filled-container-color: transparent,
+      filled-focus-active-indicator-color: transparent,
+    ));
+
+  .dark-theme {
+    color-scheme: dark;
+    @include high-contrast-overrides(color-scheme);
+
+    @include mat.button-overrides((filled-container-color: $custom-green));
+
+    @include mat.list-overrides((list-item-focus-state-layer-opacity: 0.05));
+
+    @include mat.tabs-overrides((divider-color: #67787a));
+
+    .mat-mdc-row:nth-child(odd) {
+      background: $dark-black;
+    }
+  }
+
+  /* -----------------  snackbar ------------------ */
+
+  .warning-alert {
+    @include mat.snack-bar-overrides((container-color: $warning ));
+  }
+
+  .success-alert {
+    @include mat.snack-bar-overrides((container-color:$success ));
+  }
+
+  .error-alert {
+    @include mat.snack-bar-overrides((container-color: $danger ));
+  }
+
+  .mat-mdc-card-header {
+    padding: 6px 16px 6px;
+  }
+}

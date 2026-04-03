@@ -1,0 +1,170 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:string';
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  ) !default;
+
+// scss-docs-start spacer-variables-maps
+$spacer: 1.5rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  ) !default;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  ) !default;
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+// scss-docs-start border-variables
+$border-radius: 0.25rem !default;
+$border-width: 1px !default;
+$border-widths: (
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px,
+  ) !default;
+
+
+// ---------------- Start custom css ---------------------
+$custom-primary: #f27a1a; // Brand orange (primary)
+$custom-primary-dark: #c85e0f; // For hover/active
+$custom-primary-light: #ffb37a; // For containers
+
+$custom-secondary: #2f2a25; // Warm charcoal (secondary)
+$custom-tertiary: #8b5a2b; // Brown-ish tertiary (optional accent)
+
+$custom-green: #22c55e; // success
+$custom-red: #ef4444; // warning/error-ish
+$custom-purple: #7c3aed;
+$custom-orange: $custom-primary; // keep compatibility
+
+$white: #ffffff;
+$dark-black: #000000;
+
+
+// neutrals (warm)
+$surface: #fff7f0;
+$surface-container: #fff1e5;
+$outline: #e7d7c9;
+
+// Metallic / UI tones (updated to warm gray)
+$metallic-blue: #3a3a3a;
+$bright-metallic-blue: #4a4a4a;
+$lighter-metallic-blue: #5a5a5a;
+$light-metallic-blue: #2a2a2a;
+
+$theme-success: $custom-green;
+$theme-warning: $custom-red;
+$theme-queue: $custom-primary;
+$theme-scheduled: $custom-purple;
+$theme-process: $custom-primary;
+// ---------------- End custom css ---------------------
+
+$default: #344675 !default;
+$success: #4caf50 !default;
+$info: #1d8cf8 !default;
+$warning: #e79600 !default;
+$danger: #f9454b !default;
+$black: #222a42 !default;
+$dark: #131313 !default;
+$darker: color.adjust($dark, $lightness: -15%) !default;
+$light-purple: color.adjust($custom-purple, $lightness: 8%) !default;
+
+$theme-colors: (
+  'default': $default,
+  'primary': $custom-primary,
+  'secondary': $custom-orange,
+  'success': $custom-green,
+  'info': #29b6f6,
+  'warning': #ffa726,
+  'danger': $custom-red,
+  'white': $white,
+  'dark': $dark-black,
+  'darker': #0a0a0a,
+);
+// Breadcrumbs
+
+// scss-docs-start breadcrumb-variables
+$breadcrumb-font-size: null !default;
+$breadcrumb-padding-y: 0 !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-item-padding-x: 0.5rem !default;
+$breadcrumb-margin-bottom: 1rem !default;
+$breadcrumb-bg: null !default;
+$breadcrumb-divider-color: #212529 !default;
+$breadcrumb-active-color: #212529 !default;
+$breadcrumb-divider: string.quote('|') !default;
+$breadcrumb-divider-flipped: $breadcrumb-divider !default;
+$breadcrumb-border-radius: null !default;
+// scss-docs-end breadcrumb-variables
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+
+$alert-bg-level: -2 !default;
+$alert-border-level: -2 !default;
+$alert-color-level: 0 !default;
+
+$alert-padding-y: $spacer !default;
+$alert-padding-x: $spacer !default;
+$alert-margin-bottom: 1rem !default;
+$alert-border-radius: $border-radius !default;
+$alert-border-width: $border-width !default;
+$alert-bg-scale: -80% !default;
+$alert-border-scale: -70% !default;
+$alert-color-scale: 40% !default;
+$enable-rounded: true !default;
+
+$enable-grid-classes: true !default;
+$grid-columns: 12 !default;
+$grid-row-columns: 6 !default;
+$grid-gutter-width: 15px !default;
+$gutters: $spacers !default;
+// Prefix for :root CSS variables
+
+$variable-prefix: bs- !default;
+
+// Container padding
+
+$container-padding-x: $grid-gutter-width * 0.5 !default;
+
+$extra-small-breakpoint-width: 720px;
+// The small breakpoint is used for the component category and component list pages, the component
+// pages, the component sidenav, and certain aspects of the tables.
+$small-breakpoint-width: 959px;
+
+/* For desktop, the content should be aligned with the page title. */
+$content-padding-guides-side: 70px;
+$content-padding-sidenav: 50px;
+$content-padding-side-xs: 15px;
+
+$sidenav-width: 70px;
+$short-sidenav-width: 240px;
+
+$header-height: 56px;

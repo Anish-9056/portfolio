@@ -1,0 +1,108 @@
+<section class="section about-section" id="about" tabindex="0">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section-header animate-on-scroll">
+      <span class="section-tag">
+        <mat-icon class="tag-icon">person</mat-icon>
+        About
+      </span>
+      <h2 class="section-title">Get To Know Me</h2>
+      <p class="section-description">
+        Full Stack Developer with 4+ years of experience building
+        enterprise-grade web applications.
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <!-- <div class="about-grid"> -->
+
+    <!-- LEFT: About Content -->
+    <div class="about-content animate-on-scroll animation-delay-2">
+      <div class="content-card">
+
+        <!-- Bio -->
+        <div class="bio-section">
+          <h3 class="bio-title">
+            <mat-icon class="bio-icon">terminal</mat-icon>
+            Who I Am
+          </h3>
+          <p class="bio-text">
+            I'm a Frontend Specialist and Full Stack Developer who thrives on
+            turning complex problems into elegant, performant web applications.
+            With a strong foundation in modern JavaScript frameworks and
+            backend technologies, I build end-to-end enterprise solutions
+            focused on user experience and code efficiency.
+          </p>
+          <p class="bio-text">
+            I specialize in scalable architecture, optimized performance,
+            and seamless API integration — delivering products that serve
+            thousands of users reliably.
+          </p>
+        </div>
+
+        <!-- Highlights -->
+        <div class="highlights-section">
+          <h3 class="bio-title">
+            <mat-icon class="bio-icon">emoji_events</mat-icon>
+            Key Highlights
+          </h3>
+          <div class="highlights-grid">
+            @for (stat of highlights; track stat.label) {
+            <div class="highlight-card">
+              <span class="highlight-value">{{ stat.value }}</span>
+              <span class="highlight-label">{{ stat.label }}</span>
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-section">
+          <h3 class="bio-title">
+            <mat-icon class="bio-icon">code</mat-icon>
+            Technologies I Work With
+          </h3>
+          <ul class="skills-list">
+            @for (item of skillsList(); track $index; let i = $index) {
+            <li class="skill-element" [style.animation-delay]="(i * 80) + 'ms'">
+              <mat-icon class="skill-bullet">arrow_right</mat-icon>
+              <span>{{ item }}</span>
+            </li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Visual -->
+    <!-- <div class="about-visual-wrapper animate-on-scale animation-delay-3">
+        <div class="visual-card">
+
+          <div class="bg-pattern"></div>
+          <div class="bg-glow"></div>
+
+          <div class="tech-icons">
+            @for (tech of techStack; track tech.name; let i = $index) {
+            <div class="tech-icon-item" [style.animation-delay]="(i * 400) + 'ms'">
+              <div class="icon-wrapper">
+                <mat-icon [svgIcon]="tech.icon"></mat-icon>
+              </div>
+              <span class="tech-name">{{ tech.name }}</span>
+            </div>
+            }
+          </div>
+
+          <div class="visual-decoration">
+            <div class="deco-ring deco-ring--1"></div>
+            <div class="deco-ring deco-ring--2"></div>
+          </div>
+
+        </div>
+      </div> -->
+
+    <!-- </div> -->
+
+  </div>
+</section>

@@ -1,0 +1,427 @@
+@use '../../../../assets/styles/variables' as *;
+
+.about-section {
+  padding: 100px 0;
+  position: relative;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // ==================== HEADER (consistent) ====================
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: $custom-primary;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      padding: 6px 16px;
+      border-radius: 24px;
+      background: rgba($custom-primary, 0.08);
+      border: 1px solid rgba($custom-primary, 0.15);
+
+      .tag-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 700;
+      margin: 0 0 16px 0;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .section-description {
+      font-size: 17px;
+      line-height: 1.7;
+      opacity: 0.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  // ==================== CONTENT GRID ====================
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  // ==================== LEFT: CONTENT CARD ====================
+  .content-card {
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    background: rgba(128, 128, 128, 0.03);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @media (max-width: 600px) {
+      padding: 24px 20px;
+      gap: 28px;
+    }
+  }
+
+  // --- Bio Title (reusable within card) ---
+  .bio-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.2px;
+
+    .bio-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: $custom-primary;
+    }
+  }
+
+  // --- Bio Text ---
+  .bio-text {
+    font-size: 14px;
+    line-height: 1.75;
+    opacity: 0.6;
+    margin: 0 0 12px 0;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  // --- Highlights Grid ---
+  .highlights-section {
+    padding-top: 24px;
+    border-top: 1px solid rgba(128, 128, 128, 0.08);
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  }
+
+  .highlight-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(128, 128, 128, 0.08);
+    background: rgba(128, 128, 128, 0.02);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      border-color: rgba($custom-primary, 0.2);
+      background: rgba($custom-primary, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .highlight-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: $custom-primary;
+      line-height: 1;
+    }
+
+    .highlight-label {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.5;
+      letter-spacing: 0.3px;
+    }
+  }
+
+  // --- Skills Section ---
+  .skills-section {
+    padding-top: 24px;
+    border-top: 1px solid rgba(128, 128, 128, 0.08);
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 8px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skill-element {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: skillSlideIn 0.4s ease forwards;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba($custom-primary, 0.05);
+
+      span {
+        color: $custom-primary;
+      }
+
+      .skill-bullet {
+        color: $custom-primary;
+      }
+    }
+
+    .skill-bullet {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: $custom-primary;
+      opacity: 0.7;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    span {
+      opacity: 0.7;
+      transition: all 0.2s ease;
+    }
+  }
+
+  // ==================== RIGHT: VISUAL CARD ====================
+  .visual-card {
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    background: rgba(128, 128, 128, 0.03);
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+
+    @media (max-width: 600px) {
+      min-height: 380px;
+      padding: 32px 20px;
+    }
+  }
+
+  // --- Grid Pattern ---
+  .bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($custom-primary, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($custom-primary, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  // --- Glow ---
+  .bg-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle,
+        rgba($custom-primary, 0.15),
+        transparent 70%);
+    filter: blur(60px);
+    z-index: 1;
+    animation: glowMove 6s ease-in-out infinite alternate;
+  }
+
+  // --- Tech Icons ---
+  .tech-icons {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    justify-items: center;
+
+    @media (max-width: 600px) {
+      gap: 16px;
+    }
+  }
+
+  .tech-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: float 4s ease-in-out infinite;
+
+    .icon-wrapper {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: rgba(128, 128, 128, 0.06);
+      border: 1px solid rgba(128, 128, 128, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+
+      @media (max-width: 600px) {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+      }
+
+      mat-icon {
+        width: 36px;
+        height: 36px;
+        filter: grayscale(20%) brightness(1.1);
+        transition: all 0.3s ease;
+
+        @media (max-width: 600px) {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+
+    .tech-name {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.4;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      .icon-wrapper {
+        border-color: rgba($custom-primary, 0.3);
+        background: rgba($custom-primary, 0.08);
+        transform: scale(1.1);
+        box-shadow: 0 8px 24px rgba($custom-primary, 0.1);
+
+        mat-icon {
+          filter: none;
+        }
+      }
+
+      .tech-name {
+        opacity: 0.8;
+        color: $custom-primary;
+      }
+    }
+  }
+
+  // --- Decorative Rings ---
+  .visual-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    .deco-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba($custom-primary, 0.06);
+
+      &--1 {
+        width: 300px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &--2 {
+        width: 450px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  // ==================== ANIMATIONS ====================
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glowMove {
+    0% {
+      transform: translate(-40px, -40px);
+    }
+
+    100% {
+      transform: translate(40px, 40px);
+    }
+  }
+
+  @keyframes skillSlideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  // ==================== RESPONSIVE ====================
+  @media (max-width: 768px) {
+    padding: 60px 0;
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .content-card {
+      border-radius: 16px;
+    }
+
+    .visual-card {
+      border-radius: 16px;
+    }
+  }
+}

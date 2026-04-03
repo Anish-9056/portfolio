@@ -1,0 +1,390 @@
+@use '../../../../assets/styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(128, 128, 128, 0.06);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  &.scrolled {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(var(--mat-sys-surface-rgb, 128, 128, 128), 0.8);
+
+    &::after {
+      opacity: 1;
+    }
+
+    .container {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: padding 0.3s ease;
+  }
+
+  // ==================== LOGO ====================
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    .logo-bracket {
+      color: $custom-primary;
+      font-weight: 400;
+      font-size: 22px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .logo-slash {
+      color: $custom-primary;
+      font-weight: 400;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      background: rgba($custom-primary, 0.04);
+
+      .logo-bracket,
+      .logo-slash {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ==================== DESKTOP MENU ====================
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      opacity: 0.6;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+
+      .nav-number {
+        color: $custom-primary;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0.8;
+      }
+
+      &:hover {
+        opacity: 1;
+        background: rgba(128, 128, 128, 0.06);
+      }
+
+      &.active {
+        opacity: 1;
+        color: $custom-primary;
+        background: rgba($custom-primary, 0.06);
+
+        .nav-number {
+          opacity: 1;
+        }
+      }
+    }
+
+    // --- Resume Button ---
+    .nav-resume {
+      margin-left: 8px;
+
+      .resume-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: $custom-primary;
+        border: 1px solid rgba($custom-primary, 0.3);
+        background: transparent;
+        opacity: 1;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+
+        .resume-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          background: rgba($custom-primary, 0.06);
+          border-color: $custom-primary;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba($custom-primary, 0.1);
+        }
+      }
+    }
+  }
+
+  // ==================== MOBILE BUTTON ====================
+  .menu-btn {
+    display: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    background: rgba(128, 128, 128, 0.04);
+    color: inherit;
+    transition: all 0.3s ease;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      border-color: rgba($custom-primary, 0.2);
+      background: rgba($custom-primary, 0.04);
+    }
+  }
+
+  // ==================== MOBILE OVERLAY ====================
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // ==================== MOBILE MENU ====================
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(320px, 80vw);
+    height: 100vh;
+    height: 100dvh;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    background: var(--mat-sys-surface, #121212);
+    border-left: 1px solid rgba(128, 128, 128, 0.08);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+
+    &.show {
+      right: 0;
+    }
+
+    // --- Header ---
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.06);
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .mobile-close {
+        padding: 6px;
+        border-radius: 8px;
+        border: 1px solid rgba(128, 128, 128, 0.1);
+        background: rgba(128, 128, 128, 0.04);
+        color: inherit;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+        }
+
+        &:hover {
+          border-color: rgba($custom-primary, 0.2);
+          background: rgba($custom-primary, 0.04);
+        }
+      }
+    }
+
+    // --- Links ---
+    .mobile-menu-links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      gap: 4px;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 14px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        opacity: 0.6;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .nav-number {
+          color: $custom-primary;
+          font-size: 13px;
+          font-weight: 600;
+          opacity: 0.8;
+          min-width: 28px;
+        }
+
+        &:hover {
+          opacity: 1;
+          background: rgba(128, 128, 128, 0.06);
+        }
+
+        &.active {
+          opacity: 1;
+          color: $custom-primary;
+          background: rgba($custom-primary, 0.06);
+          border-left: 3px solid $custom-primary;
+
+          .nav-number {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    // --- Footer ---
+    .mobile-menu-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(128, 128, 128, 0.06);
+
+      .resume-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 14px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: $custom-primary;
+        border: 1px solid rgba($custom-primary, 0.3);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        .resume-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+
+        &:hover {
+          background: rgba($custom-primary, 0.06);
+          border-color: $custom-primary;
+        }
+      }
+    }
+  }
+}
+
+// ==================== RESPONSIVE ====================
+@media (max-width: 768px) {
+  .navbar {
+    .nav-links {
+      display: none !important;
+    }
+
+    .menu-btn {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      padding: 16px 20px;
+    }
+
+    &.scrolled .container {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    .logo {
+      font-size: 18px;
+      padding: 4px 8px;
+
+      .logo-bracket {
+        font-size: 20px;
+      }
+    }
+  }
+}

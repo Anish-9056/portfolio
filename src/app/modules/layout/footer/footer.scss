@@ -1,0 +1,343 @@
+@use '../../../../assets/styles/variables' as *;
+
+.footer {
+  position: relative;
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // ==================== FIXED SIDE BARS ====================
+
+  .left-bar,
+  .right-bar {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 90px;
+      margin: 0 auto;
+      background: rgba(128, 128, 128, 0.15);
+      transition: background 0.3s ease;
+    }
+  }
+
+  // ==================== LEFT SOCIAL BAR ====================
+  .social-bar {
+    left: 36px;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    li a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: inherit;
+      opacity: 0.45;
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        opacity: 1;
+        color: $custom-primary;
+        background: rgba($custom-primary, 0.06);
+        transform: translateY(-3px);
+
+        mat-icon {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  // ==================== RIGHT EMAIL BAR ====================
+  .email-bar {
+    right: 36px;
+
+    a {
+      display: block;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      writing-mode: vertical-rl;
+      color: inherit;
+      opacity: 0.45;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 6px;
+
+      &:hover {
+        opacity: 1;
+        color: $custom-primary;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  // ==================== FOOTER BOTTOM ====================
+  .footer-bottom {
+    padding: 0 0 40px 0;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: rgba(128, 128, 128, 0.08);
+    margin-bottom: 40px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  // --- Logo (matches navbar) ---
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    letter-spacing: -0.5px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+    .logo-bracket {
+      color: $custom-primary;
+      font-weight: 400;
+      font-size: 20px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo-slash {
+      color: $custom-primary;
+      font-weight: 400;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      background: rgba($custom-primary, 0.04);
+
+      .logo-bracket,
+      .logo-slash {
+        opacity: 1;
+      }
+    }
+  }
+
+  // --- Footer Navigation ---
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      opacity: 0.5;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        opacity: 1;
+        color: $custom-primary;
+        background: rgba($custom-primary, 0.06);
+      }
+    }
+  }
+
+  // --- Social Mobile (visible only on mobile) ---
+  .footer-social-mobile {
+    display: none;
+    align-items: center;
+    gap: 8px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(128, 128, 128, 0.1);
+      background: rgba(128, 128, 128, 0.03);
+      text-decoration: none;
+      color: inherit;
+      opacity: 0.5;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      &:hover {
+        opacity: 1;
+        color: $custom-primary;
+        border-color: rgba($custom-primary, 0.2);
+        background: rgba($custom-primary, 0.06);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // --- Credits ---
+  .footer-credits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .credits-main {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.45;
+
+      a {
+        color: $custom-primary;
+        text-decoration: none;
+        font-weight: 600;
+        opacity: 0.9;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+      }
+    }
+
+    .credits-tech {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(128, 128, 128, 0.04);
+      border: 1px solid rgba(128, 128, 128, 0.06);
+
+      .tech-icon {
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+        color: $custom-primary;
+      }
+    }
+  }
+
+  // ==================== RESPONSIVE ====================
+  @media (max-width: 1080px) {
+    .social-bar {
+      left: 20px;
+    }
+
+    .email-bar {
+      right: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-social-mobile {
+      display: flex;
+    }
+
+    .footer-bottom {
+      padding: 0 0 32px 0;
+    }
+
+    .footer-divider {
+      margin-bottom: 32px;
+    }
+
+    .footer-content {
+      gap: 24px;
+    }
+
+    .footer-nav {
+      gap: 4px;
+
+      a {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-nav a {
+      font-size: 11px;
+      padding: 5px 8px;
+    }
+
+    .footer-social-mobile a {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+    }
+
+    .footer-credits {
+      .credits-main {
+        font-size: 12px;
+      }
+
+      .credits-tech {
+        font-size: 10px;
+      }
+    }
+  }
+}

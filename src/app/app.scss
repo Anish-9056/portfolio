@@ -1,0 +1,12 @@
+@use '../assets/styles/variables' as *;
+
+:host {
+  background-color: var(--mat-sys-background);
+  min-height: 100vh;
+  display: block;
+}
+
+.app-content {
+  background-color: var(--mat-sys-background);
+  min-height: 100vh;
+}

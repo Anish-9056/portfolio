@@ -1,0 +1,89 @@
+<section class="section jobs-section" id="jobs">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section-header animate-on-scroll">
+      <span class="section-tag">
+        <mat-icon class="tag-icon">work_history</mat-icon>
+        Experience
+      </span>
+      <h2 class="section-title">Where I've Worked</h2>
+      <p class="section-description">
+        Building enterprise-grade applications and leading frontend architecture
+        across product teams.
+      </p>
+    </div>
+
+    <!-- Jobs Container -->
+    <div class="jobs-container animate-on-scroll animation-delay-2">
+      <div class="jobs-tabs">
+
+        <!-- LEFT TABS -->
+        <ul class="tabs-list">
+          @for (job of jobs(); track $index; let i = $index) {
+          <li [class.active]="activeIndex() === i" (click)="selectTab(i)" (keydown.enter)="selectTab(i)" tabindex="0"
+            role="tab" [attr.aria-selected]="activeIndex() === i">
+            <mat-icon class="tab-icon">{{ job.icon || 'business' }}</mat-icon>
+            <div class="tab-text">
+              <span class="tab-company">{{ job.tab }}</span>
+              <span class="tab-period">{{ job.shortDate }}</span>
+            </div>
+          </li>
+          }
+        </ul>
+
+        <!-- RIGHT CONTENT -->
+        <div class="tab-content">
+          @if (activeJob(); as job) {
+          <div class="content-inner">
+
+            <!-- Role Header -->
+            <div class="role-header">
+              <h4 class="job-title">{{ job.title }}</h4>
+              <a class="company-link" [href]="job.link" target="_blank" rel="noopener">
+                <mat-icon class="link-icon">business</mat-icon>
+                {{ job.tab }}
+                <mat-icon class="external-icon">open_in_new</mat-icon>
+              </a>
+            </div>
+
+            <!-- Meta -->
+            <div class="job-meta">
+              <span class="meta-item">
+                <mat-icon class="meta-icon">calendar_month</mat-icon>
+                {{ job.date }}
+              </span>
+              <span class="meta-item">
+                <mat-icon class="meta-icon">location_on</mat-icon>
+                {{ job.location }}
+              </span>
+            </div>
+
+            <!-- Responsibilities -->
+            <ul class="job-responsibilities">
+              @for (desc of job.description; track $index) {
+              <li>
+                <mat-icon class="bullet-icon">arrow_right</mat-icon>
+                <span>{{ desc }}</span>
+              </li>
+              }
+            </ul>
+
+            <!-- Tech used -->
+            @if (job.techUsed) {
+            <div class="job-tech">
+              @for (tech of job.techUsed; track tech) {
+              <span class="tech-tag">{{ tech }}</span>
+              }
+            </div>
+            }
+
+          </div>
+          }
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

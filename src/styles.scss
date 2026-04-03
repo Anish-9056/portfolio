@@ -1,1 +1,93 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use './assets/styles/custom-theme';
+@use './assets/styles/variables' as *;
+
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  // background-color: var(--mat-sys-surface);
+  // color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.section-box {
+  padding: 130px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+
+  span {
+    color: $custom-primary;
+    margin-right: 8px;
+  }
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.underline {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  color: var(--mat-sys-secondary);
+}
+
+.underline:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 3px;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: $custom-primary-dark;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0%;
+}
+
+.underline:hover:after {
+  width: 100%;
+  left: 0;
+}

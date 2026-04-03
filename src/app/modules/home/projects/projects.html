@@ -1,0 +1,93 @@
+<section class="section projects-section" id="projects">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section-header animate-on-scroll">
+      <span class="section-tag">
+        <mat-icon class="tag-icon">folder_special</mat-icon>
+        Portfolio
+      </span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-description">
+        A collection of enterprise-grade applications and platforms I've engineered,
+        impacting thousands of users worldwide.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filters-wrapper animate-on-scroll animation-delay-2">
+      <div class="filter-tabs">
+        @for (category of projectCategories; track category.id) {
+        <button class="filter-btn" [class.active]="activeCategory() === category.id" (click)="setCategory(category.id)">
+          {{ category.label }}
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      @for (project of filteredProjects(); track project.id; let i = $index) {
+      <article class="project-card animate-on-scroll" [style.animation-delay]="(i * 100) + 'ms'">
+
+        <!-- Visual Header -->
+        <div class="card-visual" [style.background]="project.gradient">
+          <div class="visual-pattern">
+            <div class="pattern-dots"></div>
+          </div>
+          <div class="visual-icon-wrapper">
+            <mat-icon class="visual-icon">{{ project.icon }}</mat-icon>
+          </div>
+          <div class="visual-decoration">
+            <div class="deco-circle deco-circle--1"></div>
+            <div class="deco-circle deco-circle--2"></div>
+            <div class="deco-circle deco-circle--3"></div>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body">
+          <!-- Meta Row -->
+          <div class="card-meta">
+            <span class="category-badge">{{ getCategoryLabel(project.category) }}</span>
+            <span class="company-name">
+              <mat-icon class="company-icon">business</mat-icon>
+              {{ project.company }}
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h3 class="card-title">{{ project.title }}</h3>
+
+          <!-- Role -->
+          <span class="role-tag">{{ project.role }}</span>
+
+          <!-- Description -->
+          <p class="card-description">{{ project.description }}</p>
+
+          <!-- Highlights -->
+          <div class="card-highlights">
+            @for (highlight of project.highlights; track highlight) {
+            <div class="highlight-item">
+              <mat-icon class="highlight-icon">check_circle</mat-icon>
+              <span>{{ highlight }}</span>
+            </div>
+            }
+          </div>
+
+          <!-- Tech Stack -->
+          <div class="card-footer">
+            <div class="tech-stack">
+              @for (tech of project.stack; track tech) {
+              <span class="tech-tag">{{ tech }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+      </article>
+      }
+    </div>
+
+  </div>
+</section>
